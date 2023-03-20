@@ -1,7 +1,8 @@
+# syntax=docker/dockerfile:1.4
 FROM    alpine:3.17
-#RUN     apk add --no-cache wireguard-tools tini
-RUN     apk add --no-cache wireguard-tools
-COPY    wireguard.sh /wireguard.sh
-#ENTRYPOINT ["tini","/wireguard.sh"]
+RUN     --mount=type=bind,target=/context <<HERE
+	apk add --no-cache wireguard-tools
+	cp /context/wireguard.sh /
+HERE
 ENTRYPOINT ["/wireguard.sh"]
 CMD     ["wg0"]

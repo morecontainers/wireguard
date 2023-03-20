@@ -4,4 +4,4 @@ do
 	wg-quick up "$1"
 	shift
 done
-tail -f /dev/null
+exec tail -f /dev/null
